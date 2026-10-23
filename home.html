@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- miaoda-super-design | title: 满幅破格 | skeleton: 满幅舞台工具条 | sig: 编目参数行发丝引线竖排标注元数据，超大等宽数字破格越出细线框下缘 -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>极简倒计时 · 满幅破格</title>
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        container: { center: true, padding: '2rem', screens: { '2xl': '1400px' } },
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+            secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+            destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+            muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+            accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+            popover: { DEFAULT: 'hsl(var(--popover))', foreground: 'hsl(var(--popover-foreground))' },
+            card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' }
+          },
+          borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)'
+          },
+          fontFamily: {
+            sans: ['HarmonyOSSans', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+            display: ['Coda', 'HarmonyOSSans', 'monospace']
+          },
+          keyframes: {
+            /* ===== KEYFRAMES:BEGIN ===== */
+            'open-reveal': { '0%': { clipPath: 'inset(0 50% 0 50%)' }, '100%': { clipPath: 'inset(0 0 0 0)' } },
+            'fade-down': { '0%': { opacity: '0', transform: 'translateY(-12px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            'fade-up': { '0%': { opacity: '0', transform: 'translateY(12px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            /* ===== KEYFRAMES:END ===== */
+          },
+          animation: {
+            /* ===== ANIMATIONS:BEGIN ===== */
+            'open-reveal': 'open-reveal 1s ease-out forwards',
+            'fade-down': 'fade-down 0.6s ease-out forwards',
+            'fade-up': 'fade-up 0.6s ease-out forwards',
+            /* ===== ANIMATIONS:END ===== */
+          }
+        }
+      },
+      plugins: [
+        function ({ addVariant }) {
+          addVariant('intersect', '&:not([no-intersect])');
+        }
+      ]
+    };
+  </script>
+  <style>
+    /* ===== FONT-FACE:BEGIN ===== */
+    @font-face {
+      font-family: "Coda";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/Coda-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "HarmonyOSSans";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "HarmonyOSSans";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "HarmonyOSSans";
+      src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    /* ===== FONT-FACE:END ===== */
+
+    /* ===== DESIGN-TOKENS:BEGIN ===== */
+    :root {
+      --radius: 0.25rem;
+      --background: 231 18% 8%;
+      --foreground: 0 0% 100%;
+      --card: 225 14% 11%;
+      --card-foreground: 0 0% 100%;
+      --primary: 226 52% 66%;
+      --primary-foreground: 222 47% 11%;
+      --secondary: 243 36% 61%;
+      --secondary-foreground: 0 0% 100%;
+      --muted: 227 15% 18%;
+      --muted-foreground: 215 20% 68%;
+      --accent: 204 48% 69%;
+      --accent-foreground: 222 47% 11%;
+      --destructive: 0 74% 51%;
+      --destructive-foreground: 0 0% 100%;
+      --border: 228 14% 36%;
+      --input: 228 14% 36%;
+      --ring: 226 52% 66%;
+      --popover: 225 14% 11%;
+      --popover-foreground: 0 0% 100%;
+    }
+    /* ===== DESIGN-TOKENS:END ===== */
+
+    /* ===== CUSTOM-TOKENS:BEGIN ===== */
+    :root {
+    }
+    /* ===== CUSTOM-TOKENS:END ===== */
+
+    /* ===== SIGNATURE-CSS:BEGIN ===== */
+    body { font-family: "HarmonyOSSans", "PingFang SC", "Microsoft YaHei", sans-serif; transition: background-color 0.6s ease; }
+    .sig-digits {
+      font-family: "Coda", "HarmonyOSSans", monospace;
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(4.5rem, 16vw, 12rem);
+      line-height: 0.95;
+      color: hsl(var(--foreground));
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      margin-bottom: -1.25rem;
+    }
+    .sig-frame {
+      border: 1px solid hsl(var(--border));
+      padding: 1.5rem 1rem 0.5rem;
+      overflow: visible;
+    }
+    @media (min-width: 768px) {
+      .sig-digits { position: relative; left: -5%; width: 110%; margin-bottom: -2rem; }
+    }
+    .sig-vertical {
+      writing-mode: vertical-rl;
+      letter-spacing: 0.5em;
+    }
+    .sig-divider { display: inline-block; width: 1px; height: 0.75rem; background: hsl(var(--border)); }
+    .sig-pulse {
+      display: inline-block;
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 9999px;
+      background: hsl(var(--primary));
+      animation: sig-pulse-blink 1s linear infinite;
+    }
+    @keyframes sig-pulse-blink {
+      0% { opacity: 1; }
+      60% { opacity: 0.15; }
+      100% { opacity: 1; }
+    }
+    .tab-btn { color: hsl(var(--muted-foreground)); transition: color 0.2s ease, background-color 0.2s ease; }
+    .tab-btn + .tab-btn { border-left: 1px solid hsl(var(--border)); }
+    .tab-active { color: hsl(var(--primary)); background: hsl(var(--primary) / 0.1); }
+    .input-shell {
+      background: transparent;
+      color: hsl(var(--foreground));
+      border: 1px solid hsl(var(--border));
+      border-radius: var(--radius);
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      outline: none;
+      color-scheme: dark;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .input-shell:focus { border-color: hsl(var(--primary)); box-shadow: 0 0 0 1px hsl(var(--primary)); }
+    .error-text { color: hsl(0 84% 71%); }
+    body.time-up { background-color: hsl(var(--destructive)); }
+    body.time-up .sig-digits { color: hsl(var(--destructive-foreground)); }
+    /* ===== SIGNATURE-CSS:END ===== */
+  </style>
+</head>
+<body class="bg-background text-foreground antialiased">
+
+  <header class="flex items-center justify-between border-b border-border px-6 py-4 opacity-0 animate-fade-down md:px-10">
+    <div class="flex items-baseline gap-3">
+      <span class="text-sm font-medium text-foreground">极简倒计时</span>
+      <span class="font-display text-xs uppercase tracking-[0.3em] text-muted-foreground">Countdown</span>
+    </div>
+    <div class="flex items-center gap-3 font-display text-xs text-muted-foreground">
+      <span class="sig-pulse" aria-hidden="true"></span>
+      <span id="session-meta">SESSION — 01 · LOCAL</span>
+    </div>
+  </header>
+
+  <main class="relative flex min-h-[calc(100vh-3.25rem)] w-full flex-col items-center justify-center overflow-hidden pb-28 pt-12">
+    <p class="sig-vertical absolute left-6 top-1/2 hidden -translate-y-1/2 text-xs uppercase text-muted-foreground md:block" aria-hidden="true">剩余时间 · Remaining</p>
+
+    <section id="stage" class="flex w-full flex-col items-center gap-8 px-6">
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-xs uppercase text-muted-foreground opacity-0 animate-fade-up [animation-delay:250ms]">
+        <span>T-Minus</span>
+        <span class="sig-divider" aria-hidden="true"></span>
+        <span id="param-mode">Mode · 目标时间</span>
+        <span class="sig-divider" aria-hidden="true"></span>
+        <span id="param-set">Set · +01:00:00</span>
+      </div>
+
+      <div class="sig-frame w-full max-w-4xl">
+        <div class="sig-digits [clip-path:inset(0_50%_0_50%)] animate-open-reveal">
+          <span id="d-h">01</span><span aria-hidden="true">:</span><span id="d-m">00</span><span aria-hidden="true">:</span><span id="d-s">00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部工具条 -->
+    <div id="toolbar" class="absolute inset-x-0 bottom-0 border-t border-border bg-background/60 px-6 py-4 backdrop-blur-sm opacity-0 animate-fade-up [animation-delay:400ms] md:px-10">
+      <div id="setup-bar" class="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
+        <div class="flex shrink-0 overflow-hidden rounded-md border border-border" role="tablist" aria-label="时间设置方式">
+          <button type="button" id="tab-target" role="tab" aria-selected="true" class="tab-btn tab-active px-5 py-2 text-xs">目标时间</button>
+          <button type="button" id="tab-quick" role="tab" aria-selected="false" class="tab-btn px-5 py-2 text-xs">快捷时长</button>
+        </div>
+        <input id="target-input" type="datetime-local" class="input-shell w-full md:w-auto" aria-label="目标日期与时分" />
+        <input id="quick-input" type="number" min="1" step="1" placeholder="分钟数" class="input-shell hidden w-full md:w-36" aria-label="倒计时分钟数" />
+        <p id="setup-error" class="hidden text-xs error-text md:ml-auto"></p>
+        <button type="button" id="start-btn" class="shrink-0 rounded-md bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 md:ml-auto">开始倒计时</button>
+      </div>
+      <div id="run-bar" class="hidden items-center justify-between gap-4">
+        <p id="run-meta" class="text-xs text-muted-foreground"></p>
+        <button type="button" id="reset-btn" class="shrink-0 rounded-md border border-border px-6 py-2.5 text-sm text-foreground transition-colors hover:border-primary hover:text-primary">重置</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 结束提醒 -->
+  <div id="done-overlay" class="fixed inset-0 z-50 hidden items-center justify-center bg-background/80 p-4 backdrop-blur-sm">
+    <div class="flex w-full max-w-sm flex-col items-center gap-5 rounded-lg border border-border bg-card p-8 text-center shadow-xl">
+      <span class="h-2 w-2 rounded-full bg-destructive"></span>
+      <h2 class="text-2xl font-medium text-foreground">时间到！</h2>
+      <p class="text-sm text-muted-foreground">本次倒计时已结束，可重新设定下一轮</p>
+      <button type="button" id="done-btn" class="rounded-md bg-primary px-8 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90">好的</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+      var tabTarget = $('tab-target'), tabQuick = $('tab-quick');
+      var targetInput = $('target-input'), quickInput = $('quick-input');
+      var setupBar = $('setup-bar'), runBar = $('run-bar');
+      var setupError = $('setup-error'), runMeta = $('run-meta');
+      var startBtn = $('start-btn'), resetBtn = $('reset-btn');
+      var doneOverlay = $('done-overlay'), doneBtn = $('done-btn');
+      var paramMode = $('param-mode'), paramSet = $('param-set');
+      var sessionMeta = $('session-meta');
+      var dH = $('d-h'), dM = $('d-m'), dS = $('d-s');
+      var mode = 'target', timer = null, totalSec = 0, session = 1, running = false;
+
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function fmt(sec) {
+        var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+        return pad(h) + ':' + pad(m) + ':' + pad(s);
+      }
+      function render(sec) {
+        var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+        dH.textContent = pad(h); dM.textContent = pad(m); dS.textContent = pad(s);
+      }
+
+      var init = new Date(Date.now() + 3600000);
+      targetInput.value = init.getFullYear() + '-' + pad(init.getMonth() + 1) + '-' + pad(init.getDate()) + 'T' + pad(init.getHours()) + ':' + pad(init.getMinutes());
+
+      function currentSec() {
+        if (mode === 'target') {
+          var v = targetInput.value;
+          if (!v) return 3600;
+          var diff = Math.floor((new Date(v).getTime() - Date.now()) / 1000);
+          return diff > 0 ? diff : 0;
+        }
+        var m = parseInt(quickInput.value, 10);
+        return m > 0 ? m * 60 : 0;
+      }
+
+      function updateParams() {
+        paramMode.textContent = 'Mode · ' + (mode === 'target' ? '目标时间' : '快捷时长');
+        var sec = currentSec();
+        if (mode === 'quick') {
+          var m = parseInt(quickInput.value, 10);
+          paramSet.textContent = 'Set · ' + (m > 0 ? m + ' Min' : '--');
+        } else {
+          paramSet.textContent = 'Set · +' + fmt(sec);
+        }
+        if (!running) render(sec);
+      }
+
+      function setMode(next) {
+        mode = next;
+        tabTarget.classList.toggle('tab-active', next === 'target');
+        tabQuick.classList.toggle('tab-active', next === 'quick');
+        tabTarget.setAttribute('aria-selected', String(next === 'target'));
+        tabQuick.setAttribute('aria-selected', String(next === 'quick'));
+        if (next === 'target') {
+          targetInput.classList.remove('hidden'); targetInput.classList.add('block');
+          quickInput.classList.add('hidden'); quickInput.classList.remove('block');
+        } else {
+          quickInput.classList.remove('hidden'); quickInput.classList.add('block');
+          targetInput.classList.add('hidden'); targetInput.classList.remove('block');
+        }
+        hideError();
+        updateParams();
+      }
+      tabTarget.addEventListener('click', function () { setMode('target'); });
+      tabQuick.addEventListener('click', function () { setMode('quick'); });
+
+      function showError(msg) { setupError.textContent = msg; setupError.classList.remove('hidden'); }
+      function hideError() { setupError.classList.add('hidden'); }
+      targetInput.addEventListener('input', function () { hideError(); updateParams(); });
+      quickInput.addEventListener('input', function () { hideError(); updateParams(); });
+
+      updateParams();
+
+      function begin(sec, meta) {
+        totalSec = sec; running = true;
+        session += 1;
+        sessionMeta.textContent = 'SESSION — ' + pad(session) + ' · LOCAL';
+        runMeta.textContent = meta;
+        setupBar.classList.add('hidden');
+        runBar.classList.remove('hidden'); runBar.classList.add('flex');
+        render(totalSec);
+        timer = setInterval(tick, 1000);
+      }
+
+      function tick() {
+        totalSec -= 1;
+        if (totalSec <= 0) { totalSec = 0; render(0); finish(); return; }
+        render(totalSec);
+      }
+
+      function finish() {
+        clearInterval(timer); timer = null;
+        document.body.classList.add('time-up');
+        doneOverlay.classList.remove('hidden'); doneOverlay.classList.add('flex');
+      }
+
+      function resetAll() {
+        if (timer) { clearInterval(timer); timer = null; }
+        running = false; totalSec = 0;
+        document.body.classList.remove('time-up');
+        doneOverlay.classList.remove('flex'); doneOverlay.classList.add('hidden');
+        runBar.classList.remove('flex'); runBar.classList.add('hidden');
+        setupBar.classList.remove('hidden');
+        updateParams();
+      }
+
+      startBtn.addEventListener('click', function () {
+        if (mode === 'target') {
+          var v = targetInput.value;
+          if (!v) { showError('请选择目标日期与时间'); return; }
+          var diff = Math.floor((new Date(v).getTime() - Date.now()) / 1000);
+          if (diff <= 0) { showError('目标时间必须晚于当前时间'); return; }
+          begin(diff, '目标时间 · ' + v.replace('T', ' '));
+        } else {
+          var m = parseInt(quickInput.value, 10);
+          if (!m || m <= 0) { showError('请输入有效的倒计时分钟数'); return; }
+          begin(m * 60, '倒计时时长 · ' + m + ' 分钟');
+        }
+      });
+      resetBtn.addEventListener('click', resetAll);
+      doneBtn.addEventListener('click', resetAll);
+    })();
+  </script>
+
+  <!-- P4 丢弃以下全部 data-preview-only 脚本 -->
+  <script src="https://code.bdstatic.com/npm/tailwindcss-intersect@2.2.0/dist/observer.min.js" data-preview-only></script>
+  <script type="module" data-preview-only>
+    import { animate, inView, scroll, stagger } from "https://cdn.jsdelivr.net/npm/motion@12.23.25/+esm";
+    Object.assign(window, { animate, inView, scroll, stagger });
+    document.dispatchEvent(new Event('motion:ready'));
+  </script>
+  <script data-preview-only>
+    /* motion 函数由上面的 module 异步挂到 window；解构必须在此回调内，顶层解构会拿到 undefined */
+    document.addEventListener('motion:ready', () => {
+      const { animate, inView, scroll, stagger } = window;
+      /* ===== MOTION-SCRIPT:BEGIN ===== */
+      /* ===== MOTION-SCRIPT:END ===== */
+    });
+  </script>
+</body>
+</html>

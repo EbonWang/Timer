@@ -1,0 +1,22 @@
+{
+  "name": "minimal-countdown",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "极简倒计时：目标时间 / 快捷时长",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.31",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}

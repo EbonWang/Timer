@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>极简倒计时 · 满幅破格</title>
+  </head>
+  <body class="bg-background text-foreground antialiased">
+    <header
+      class="flex items-center justify-between border-b border-border px-6 py-4 opacity-0 animate-fade-down md:px-10"
+    >
+      <div class="flex items-baseline gap-3">
+        <span class="text-sm font-medium text-foreground">极简倒计时</span>
+        <span class="font-display text-xs uppercase tracking-[0.3em] text-muted-foreground">Countdown</span>
+      </div>
+      <div class="flex items-center gap-3 font-display text-xs text-muted-foreground">
+        <span class="sig-pulse" aria-hidden="true"></span>
+        <span id="session-meta">SESSION — 01 · LOCAL</span>
+      </div>
+    </header>
+
+    <main class="relative flex min-h-[calc(100vh-3.25rem)] w-full flex-col items-center justify-center overflow-hidden pb-28 pt-12">
+      <p
+        class="sig-vertical absolute left-6 top-1/2 hidden -translate-y-1/2 text-xs uppercase text-muted-foreground md:block"
+        aria-hidden="true"
+      >
+        剩余时间 · Remaining
+      </p>
+
+      <section id="stage" class="flex w-full flex-col items-center gap-8 px-6">
+        <div
+          class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-xs uppercase text-muted-foreground opacity-0 animate-fade-up [animation-delay:250ms]"
+        >
+          <span>T-Minus</span>
+          <span class="sig-divider" aria-hidden="true"></span>
+          <span id="param-mode">Mode · 目标时间</span>
+          <span class="sig-divider" aria-hidden="true"></span>
+          <span id="param-set">Set · +01:00:00</span>
+        </div>
+
+        <div class="sig-frame w-full max-w-4xl">
+          <div class="sig-digits [clip-path:inset(0_50%_0_50%)] animate-open-reveal" aria-live="polite">
+            <span id="d-h">01</span><span aria-hidden="true">:</span><span id="d-m">00</span><span aria-hidden="true">:</span><span id="d-s">00</span>
+          </div>
+        </div>
+      </section>
+
+      <div
+        id="toolbar"
+        class="absolute inset-x-0 bottom-0 border-t border-border bg-background/60 px-6 py-4 backdrop-blur-sm opacity-0 animate-fade-up [animation-delay:400ms] md:px-10"
+      >
+        <div id="setup-bar" class="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
+          <div class="flex shrink-0 overflow-hidden rounded-md border border-border" role="tablist" aria-label="时间设置方式">
+            <button type="button" id="tab-target" role="tab" aria-selected="true" class="tab-btn tab-active px-5 py-2 text-xs">
+              目标时间
+            </button>
+            <button type="button" id="tab-quick" role="tab" aria-selected="false" class="tab-btn px-5 py-2 text-xs">
+              快捷时长
+            </button>
+          </div>
+          <input id="target-input" type="datetime-local" class="input-shell w-full md:w-auto" aria-label="目标日期与时分" />
+          <input
+            id="quick-input"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="分钟数"
+            class="input-shell hidden w-full md:w-36"
+            aria-label="倒计时分钟数"
+          />
+          <p id="setup-error" class="hidden text-xs error-text md:ml-auto"></p>
+          <button
+            type="button"
+            id="start-btn"
+            class="shrink-0 rounded-md bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 md:ml-auto"
+          >
+            开始倒计时
+          </button>
+        </div>
+        <div id="run-bar" class="hidden items-center justify-between gap-4">
+          <p id="run-meta" class="text-xs text-muted-foreground"></p>
+          <button
+            type="button"
+            id="reset-btn"
+            class="shrink-0 rounded-md border border-border px-6 py-2.5 text-sm text-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            重置
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <div id="done-overlay" class="fixed inset-0 z-50 hidden items-center justify-center bg-background/80 p-4 backdrop-blur-sm">
+      <div class="flex w-full max-w-sm flex-col items-center gap-5 rounded-lg border border-border bg-card p-8 text-center shadow-xl">
+        <span class="h-2 w-2 rounded-full bg-destructive"></span>
+        <h2 class="text-2xl font-medium text-foreground">时间到！</h2>
+        <p class="text-sm text-muted-foreground">本次倒计时已结束，可重新设定下一轮</p>
+        <button
+          type="button"
+          id="done-btn"
+          class="rounded-md bg-primary px-8 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+        >
+          好的
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

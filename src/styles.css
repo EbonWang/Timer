@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Coda";
+  src: url("https://resource-static.bj.bcebos.com/fonts-skill/Coda-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HarmonyOSSans";
+  src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HarmonyOSSans";
+  src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HarmonyOSSans";
+  src: url("https://resource-static.bj.bcebos.com/fonts-skill/HarmonyOSSans_Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: 231 18% 8%;
+  --foreground: 0 0% 100%;
+  --card: 225 14% 11%;
+  --card-foreground: 0 0% 100%;
+  --primary: 226 52% 66%;
+  --primary-foreground: 222 47% 11%;
+  --secondary: 243 36% 61%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 227 15% 18%;
+  --muted-foreground: 215 20% 68%;
+  --accent: 204 48% 69%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 74% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 228 14% 36%;
+  --input: 228 14% 36%;
+  --ring: 226 52% 66%;
+  --popover: 225 14% 11%;
+  --popover-foreground: 0 0% 100%;
+}
+
+body {
+  font-family: "HarmonyOSSans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  transition: background-color 0.6s ease;
+}
+
+.sig-digits {
+  font-family: "Coda", "HarmonyOSSans", monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(4.5rem, 16vw, 12rem);
+  line-height: 0.95;
+  color: hsl(var(--foreground));
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: -1.25rem;
+}
+
+.sig-frame {
+  border: 1px solid hsl(var(--border));
+  padding: 1.5rem 1rem 0.5rem;
+  overflow: visible;
+}
+
+@media (min-width: 768px) {
+  .sig-digits {
+    position: relative;
+    left: -5%;
+    width: 110%;
+    margin-bottom: -2rem;
+  }
+}
+
+.sig-vertical {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.5em;
+}
+
+.sig-divider {
+  display: inline-block;
+  width: 1px;
+  height: 0.75rem;
+  background: hsl(var(--border));
+}
+
+.sig-pulse {
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  animation: sig-pulse-blink 1s linear infinite;
+}
+
+@keyframes sig-pulse-blink {
+  0% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.tab-btn {
+  color: hsl(var(--muted-foreground));
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.tab-btn + .tab-btn {
+  border-left: 1px solid hsl(var(--border));
+}
+
+.tab-active {
+  color: hsl(var(--primary));
+  background: hsl(var(--primary) / 0.1);
+}
+
+.input-shell {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  color-scheme: dark;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-shell:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 1px hsl(var(--primary));
+}
+
+.error-text {
+  color: hsl(0 84% 71%);
+}
+
+body.time-up {
+  background-color: hsl(var(--destructive));
+}
+
+body.time-up .sig-digits {
+  color: hsl(var(--destructive-foreground));
+}
