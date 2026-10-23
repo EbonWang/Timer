@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>极简倒计时 · 满幅破格</title>
+  <meta name="description" content="一款专注、优雅的全屏倒计时工具。目标时刻或快捷分钟，一键开始，精准无漂移。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23202633'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%236d86e8' stroke-width='2.5'/%3E%3Cpath d='M16 11v5l3.5 2' fill='none' stroke='%236d86e8' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://resource-static.bj.bcebos.com" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="极简倒计时首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4">
+            <circle cx="16" cy="16" r="9" />
+            <path d="M16 11v5l3.5 2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span class="brand-text">极简倒计时<em>Countdown</em></span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="主导航">
+        <a href="#about">产品介绍</a>
+        <a href="#features">核心功能</a>
+        <a href="#steps">使用步骤</a>
+        <a href="#visual">设计语言</a>
+        <a class="nav-cta" href="https://github.com/EbonWang/Timer" target="_blank" rel="noopener">开始使用</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="hero-eyebrow reveal">
+          <span class="pulse" aria-hidden="true"></span>
+          T-MINUS · 满幅破格 · 极简设计
+        </p>
+
+        <h1 class="hero-title reveal" style="--d:0.05s">把注意力，留给<br /><span class="accent">此刻的每一秒</span></h1>
+
+        <p class="hero-sub reveal" style="--d:0.1s">
+          一款专注、优雅的全屏倒计时工具。设定目标时刻或输入快捷分钟，一键开始，
+          基于结束时刻精确计算，无累计漂移，时间到即全屏提醒。
+        </p>
+
+        <div class="hero-actions reveal" style="--d:0.15s">
+          <a class="btn btn-primary" href="https://github.com/EbonWang/Timer" target="_blank" rel="noopener">立即体验</a>
+          <a class="btn btn-ghost" href="#features">了解功能</a>
+        </div>
+
+        <!-- 倒计时舞台 -->
+        <div class="stage reveal" style="--d:0.2s">
+          <div class="stage-meta">
+            <span>T-Minus</span>
+            <span class="divider" aria-hidden="true"></span>
+            <span id="demo-mode">Mode · 目标时间</span>
+            <span class="divider" aria-hidden="true"></span>
+            <span id="demo-set">Set · +01:00:00</span>
+          </div>
+          <div class="stage-frame">
+            <div class="stage-digits" aria-live="polite">
+              <span id="demo-h">01</span><span class="colon" aria-hidden="true">:</span><span id="demo-m">00</span><span class="colon" aria-hidden="true">:</span><span id="demo-s">00</span>
+            </div>
+          </div>
+          <p class="stage-note">剩余时间 · Remaining</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 产品介绍 -->
+    <section class="section" id="about">
+      <div class="container">
+        <p class="section-kicker reveal">01 / 产品介绍</p>
+        <div class="about-grid">
+          <h2 class="section-title reveal">只为「专注」而生的<br />全屏倒计时</h2>
+          <div class="about-body reveal" style="--d:0.1s">
+            <p>
+              极简倒计时把计时这件事做到极致：一个超大等宽数字舞台，一栏安静的工具条，
+              没有多余的信息干扰。它适合演讲计时、番茄专注、烘焙烹饪、运动间歇，
+              以及任何需要「一眼看清剩余时间」的场景。
+            </p>
+            <p class="muted">
+              项目采用 Vite + TypeScript + Tailwind CSS 构建，计时核心逻辑与界面解耦，
+              已配备单元测试，可直接部署为静态站点。
+            </p>
+            <ul class="about-points">
+              <li><span class="tick" aria-hidden="true"></span>目标时刻 · 快捷分钟，双模式设定</li>
+              <li><span class="tick" aria-hidden="true"></span>基于结束时刻计算，精度无漂移</li>
+              <li><span class="tick" aria-hidden="true"></span>全屏结束提醒，会话自动编号</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section class="section section-alt" id="features">
+      <div class="container">
+        <p class="section-kicker reveal">02 / 核心功能</p>
+        <h2 class="section-title reveal">克制的功能，恰到好处</h2>
+        <p class="section-desc reveal">每项能力都围绕「看清时间、专注当下」设计，不堆砌、不喧宾夺主。</p>
+
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" />
+              </svg>
+            </span>
+            <h3>目标时间</h3>
+            <p>选择未来的日期与时刻，按墙钟剩余秒数倒计时，跨天、跨时都精准。</p>
+          </article>
+
+          <article class="feature reveal" style="--d:0.05s">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" />
+              </svg>
+            </span>
+            <h3>快捷时长</h3>
+            <p>输入分钟数即刻开始，无需翻日历，适合番茄钟、间歇训练等高频场景。</p>
+          </article>
+
+          <article class="feature reveal" style="--d:0.1s">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="0.5" fill="currentColor" />
+              </svg>
+            </span>
+            <h3>精准无漂移</h3>
+            <p>以结束时刻为锚点计算剩余秒数，而非简单递减，长时间运行依然准确。</p>
+          </article>
+
+          <article class="feature reveal" style="--d:0.15s">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.7 21a2 2 0 0 1-3.4 0" />
+              </svg>
+            </span>
+            <h3>全屏提醒</h3>
+            <p>时间到，舞台切换为警示红，弹层提醒可一键重置，进入下一轮。</p>
+          </article>
+
+          <article class="feature reveal" style="--d:0.2s">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="13" rx="2" /><path d="M8 21h8M12 17v4" />
+              </svg>
+            </span>
+            <h3>多端适配</h3>
+            <p>超大数字随视口弹性缩放，桌面与移动端皆满幅呈现，清晰可读。</p>
+          </article>
+
+          <article class="feature reveal" style="--d:0.25s">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" />
+              </svg>
+            </span>
+            <h3>会话管理</h3>
+            <p>每轮自动编号并标注 LOCAL 会话，运行中随时重置，状态清晰。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 使用步骤 -->
+    <section class="section" id="steps">
+      <div class="container">
+        <p class="section-kicker reveal">03 / 使用步骤</p>
+        <h2 class="section-title reveal">三步，开始倒数</h2>
+
+        <div class="step-list">
+          <div class="step reveal">
+            <span class="step-num">01</span>
+            <div class="step-body">
+              <h3>选择方式</h3>
+              <p>在工具条切换「目标时间」或「快捷时长」两种设定模式。</p>
+            </div>
+          </div>
+          <div class="step reveal" style="--d:0.05s">
+            <span class="step-num">02</span>
+            <div class="step-body">
+              <h3>设定时间</h3>
+              <p>目标模式选择日期与时分；快捷模式直接输入分钟数。</p>
+            </div>
+          </div>
+          <div class="step reveal" style="--d:0.1s">
+            <span class="step-num">03</span>
+            <div class="step-body">
+              <h3>开始倒计时</h3>
+              <p>点击「开始倒计时」，舞台开始倒数，时间到即全屏提醒。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 设计语言 -->
+    <section class="section section-alt" id="visual">
+      <div class="container">
+        <p class="section-kicker reveal">04 / 设计语言</p>
+        <h2 class="section-title reveal">满幅破格 · 极简克制</h2>
+        <p class="section-desc reveal">发丝引线、竖排标注、超大等宽数字破框而出，让「时间」成为唯一主角。</p>
+
+        <div class="visual-grid">
+          <div class="visual-swatch reveal">
+            <span class="swatch-dot" style="--c:hsl(226 52% 66%)"></span>
+            <div><strong>主色 · Primary</strong><span class="muted">226 52% 66%</span></div>
+          </div>
+          <div class="visual-swatch reveal" style="--d:0.05s">
+            <span class="swatch-dot" style="--c:hsl(243 36% 61%)"></span>
+            <div><strong>辅色 · Secondary</strong><span class="muted">243 36% 61%</span></div>
+          </div>
+          <div class="visual-swatch reveal" style="--d:0.1s">
+            <span class="swatch-dot" style="--c:hsl(0 74% 51%)"></span>
+            <div><strong>警示 · Destructive</strong><span class="muted">0 74% 51%</span></div>
+          </div>
+          <div class="visual-swatch reveal" style="--d:0.15s">
+            <span class="swatch-dot" style="--c:hsl(231 18% 8%)"></span>
+            <div><strong>背景 · Background</strong><span class="muted">231 18% 8%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container cta-inner reveal">
+        <h2>准备好专注了吗？</h2>
+        <p>开源、轻量、开箱即用。克隆仓库，`npm install && npm run dev` 即刻开始。</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://github.com/EbonWang/Timer" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.18c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.02 1.75 2.68 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.11c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z" />
+            </svg>
+            查看源码
+          </a>
+          <a class="btn btn-ghost" href="#top">回到顶部</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-text">极简倒计时<em>Countdown</em></span>
+        <p class="muted">满幅破格 · 极简克制的全屏倒计时</p>
+      </div>
+      <nav class="footer-nav" aria-label="页脚导航">
+        <a href="#about">产品介绍</a>
+        <a href="#features">核心功能</a>
+        <a href="#steps">使用步骤</a>
+        <a href="https://github.com/EbonWang/Timer" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 极简倒计时 · 开源项目</span>
+      <span class="muted">Built with Vite · TypeScript · Tailwind CSS</span>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
